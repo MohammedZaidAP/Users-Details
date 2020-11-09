@@ -4,4 +4,6 @@
   margin: auto;
   justify-content: space-evenly;
   padding: 20px;
+  align-items: center;
+  height: 100px;
 }

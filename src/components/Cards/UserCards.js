@@ -1,56 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UserCard from "./Card/UserCard";
 import "./UserCards.css";
+import db from "../../firebase/firebase";
 
+/*
+ *UserCards  to load the data cards.
+ *It takes db data and iterate it to and loads usercard.
+ */
 const UserCards = () => {
-  let data = [
-    {
-      id: 1,
-      mailid: "a@b.com",
-      firstname: "user1first",
-      lastname: "user1last",
-    },
-    {
-      id: 2,
-      mailid: "a@asd222.com",
-      firstname: "user2first",
-      lastname: "user2last",
-    },
-    {
-      id: 3,
-      mailid: "a@asd333.com",
-      firstname: "user3first",
-      lastname: "user3last",
-    },
-    {
-      id: 4,
-      mailid: "a@asd444.com",
-      firstname: "user4first",
-      lastname: "user4last",
-    },
-    {
-      id: 5,
-      mailid: "a@asd555.com",
-      firstname: "user5first",
-      lastname: "user5last",
-    },
-  ];
+  const [users, setUsers] = useState([]);
+
+  /*
+   *useEffect hooks - execute code that needs happens during lifecycle of the component
+   *lets React that your component needs to do db fetching after render
+   *loads db  data after fetches
+   */
+  useEffect(() => {
+    db.collection("users")
+      .doc("joKRYPW9KZBv7SJVor1F")
+      .onSnapshot((snapshot) => setUsers(snapshot.data().data));
+  }, []);
+
+  let userCardsComponent = users.map((each) => (
+    <UserCard key={each.id} user={each} users={users} />
+  ));
 
   return (
     <div className="usercards">
       <div className="usercards__card">
-        {data.length > 0 ? (
-          <React.Fragment>
-            <UserCard key="1" />
-            <UserCard key="2" />
-            <UserCard key="3" />
-            <UserCard key="4" />
-            <UserCard key="5" />
-            <UserCard key="6" />
-            <UserCard key="7" />
-            <UserCard key="8" />
-          </React.Fragment>
-        ) : null}
+        {users.length > 0 ? userCardsComponent : null}
       </div>
     </div>
   );
