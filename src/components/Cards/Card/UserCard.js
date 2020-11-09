@@ -10,6 +10,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
+import InputLabel from "@material-ui/core/InputLabel";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import db from "../../../firebase/firebase";
@@ -225,55 +226,57 @@ const UserCard = ({ user: { id, mailid, firstname, lastname }, users }) => {
   return (
     <div className="usercard">
       <div className="usercard__top">
-        <Typography variant="h5" component="h4">
-          {"#" + id}
-        </Typography>
+        <div className="typo">
+          <Typography variant="h5" component="h4">
+            {"#" + id}
+          </Typography>
+        </div>
         {isUpdate ? (
           <React.Fragment>
-            <Select
-              labelId="demo-simple-select-helper-label"
-              id="demo-simple-select-helper"
-              value={ids}
-              onChange={(event) => handleSwapComboChange(event)}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {users
-                .filter((each) => each.id !== id)
-                .map((each) => (
-                  <MenuItem key={each.id} value={each.id}>
-                    {each.id}
-                  </MenuItem>
-                ))}
-            </Select>
-            <FormHelperText>
-              {"Select Target ID to for a Data Swap"}
-            </FormHelperText>
-          </React.Fragment>
-        ) : null}
-        {!isUpdate ? (
-          <React.Fragment>
-            <IconButton onClick={() => updateDataHandler()}>
-              <EditIcon />
-            </IconButton>
-            <IconButton onClick={() => deleteDataHandler()}>
-              <DeleteIcon />
-            </IconButton>
+            <div>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={ids}
+                onChange={(event) => handleSwapComboChange(event)}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {users
+                  .filter((each) => each.id !== id)
+                  .map((each) => (
+                    <MenuItem key={each.id} value={each.id}>
+                      {each.id}
+                    </MenuItem>
+                  ))}
+              </Select>
+              <FormHelperText>{"Select ID to swap"}</FormHelperText>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={() => onSaveHandler()}
+              >
+                Save
+              </Button>
+              <IconButton onClick={() => setisUpdate(false)}>
+                <CloseIcon />
+              </IconButton>
+            </div>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              onClick={() => onSaveHandler()}
-            >
-              Save
-            </Button>
-            <IconButton onClick={() => setisUpdate(false)}>
-              <CloseIcon />
-            </IconButton>
+            <div>
+              <IconButton onClick={() => updateDataHandler()}>
+                <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => deleteDataHandler()}>
+                <DeleteIcon />
+              </IconButton>
+            </div>
           </React.Fragment>
         )}
       </div>
@@ -322,15 +325,19 @@ const UserCard = ({ user: { id, mailid, firstname, lastname }, users }) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography variant="h5" component="h4">
-              First Name : {firstname}
-            </Typography>
-            <Typography variant="h5" component="h4">
-              Last Name : {lastname}
-            </Typography>
-            <Typography variant="h5" component="h4">
-              Email Address : {mailid}
-            </Typography>
+            <div>
+              <Typography noWrap variant="h5" component="h5">
+                First Name : {firstname}
+              </Typography>
+              <br></br>
+              <Typography noWrap variant="h5" component="h5">
+                Last Name : {lastname}
+              </Typography>
+              <br></br>
+              <Typography noWrap variant="h5" component="h5">
+                Email Address : {mailid}
+              </Typography>
+            </div>
           </React.Fragment>
         )}
       </div>

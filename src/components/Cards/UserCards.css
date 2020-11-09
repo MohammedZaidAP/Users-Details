@@ -1,5 +1,7 @@
 .usercards {
   background-color: #f1f2f5;
+  width: 95%;
+  margin: auto;
 }
 
 .usercards__card {
@@ -8,6 +10,15 @@
   justify-content: center;
 }
 
-.MuiIconButton-root {
-  cursor: pointer;
+.usercard {
+  border-style: none !important;
+  height: 380px;
+}
+
+.MuiSelect-select {
+  min-width: 50px !important;
+}
+
+.usercard__middle {
+  margin: 35px;
 }
