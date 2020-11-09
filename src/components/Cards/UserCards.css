@@ -1,0 +1,9 @@
+.usercards {
+    background-color:#f1f2f5;
+}
+
+.usercards__card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

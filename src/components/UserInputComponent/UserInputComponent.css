@@ -1,0 +1,7 @@
+.userinput {
+  display: flex;
+  width: 45%;
+  margin: auto;
+  justify-content: space-evenly;
+  padding: 20px;
+}
