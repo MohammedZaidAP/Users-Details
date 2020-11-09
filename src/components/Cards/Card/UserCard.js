@@ -12,11 +12,21 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
 const UserCard = () => {
-  const [firstName, setFirstName] = useState("");
+  const [state, setState] = useState({
+    firstName: "",
+    lastName: "",
+    mailId: "",
+  });
 
-  const [lastName, setLastName] = useState("");
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
 
-  const [mailId, setMailId] = useState("");
+    console.log(state);
+  };
 
   const onSaveHandler = () => {
     alert();
@@ -58,29 +68,29 @@ const UserCard = () => {
         </Button>
       </div>
       <div className="usercard__middle">
-        {false ? (
+        {true ? (
           <React.Fragment>
             <TextField
-              id="first-name"
+              id="firstName"
               label="First Name"
               variant="outlined"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
+              value={state["firstName"]}
+              onChange={(event) => handleChange(event)}
             />
             <TextField
-              id="last-name"
+              id="lastName"
               label="Last Name"
               variant="outlined"
-              value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
+              value={state["lastName"]}
+              onChange={(event) => handleChange(event)}
             />
             <TextField
-              id="mail-id"
+              id="mailId"
               label="Email Address"
               variant="outlined"
               type="email"
-              value={mailId}
-              onChange={(event) => setMailId(event.target.value)}
+              value={state["mailId"]}
+              onChange={(event) => handleChange(event)}
             />
           </React.Fragment>
         ) : (
